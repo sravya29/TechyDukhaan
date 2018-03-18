@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/gradientback"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_width="332dp"
+            android:layout_height="39dp"
+            android:fontFamily="serif-monospace"
+            android:text="New Product Details:"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/etProdName"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="#B3E5FC"
+            android:fontFamily="casual"
+            android:hint="Enter Product Name"
+            android:textColor="@android:color/black" />
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#E1F5FE"/>
+
+
+            <Spinner
+                android:id="@+id/cat"
+                android:layout_width="180dp"
+                android:background="#B3E5FC"
+                android:layout_height="50dp"
+                android:layout_marginLeft="0dp"
+                android:contentDescription="Category"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dp"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="Age of the product"
+                android:fontFamily="casual"
+                android:textSize="20sp"
+                android:textColor="#E1F5FE"/>
+
+            <Spinner
+                android:id="@+id/sage"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="0dp"
+                android:background="#B3E5FC"
+                android:contentDescription="Category" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:text="Price of the product"
+                android:textColor="#E1F5FE"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:background="#B3E5FC"
+                android:fontFamily="casual"
+                android:hint="Price"
+                android:id="@+id/price"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="170dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:text="Upload picture of the product"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#E1F5FE"/>
+
+            <Button
+                android:id="@+id/btnUpload"
+                android:layout_width="130dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:background="#1565C0"
+                android:fontFamily="casual"
+                android:text="UPLOAD"
+                android:textColor="@android:color/white"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="130dp"
+            android:id="@+id/pic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="80dp">
+
+            <EditText
+                android:layout_width="350dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:background="#B3E5FC"
+                android:id="@+id/descript"
+                android:textColor="#E1F5FE"
+                android:hint="Enter Product Description here"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_marginTop="10dp"
+            android:layout_width="130dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="130dp"
+            android:background="#1565C0"
+            android:fontFamily="casual"
+            android:text="SUBMIT"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:onClick="addItem"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

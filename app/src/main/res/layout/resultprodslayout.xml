@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/product_list"
+    android:layout_height="match_parent"
+    android:weightSum="1" >
+
+
+
+    <ImageView
+        android:id="@+id/resprodimg"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="108dp" />
+
+    <TextView
+        android:id="@+id/resprodname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_alignTop="@+id/resprodimg"
+        android:fontFamily="casual"
+        android:hint="NAME"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resprodname"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/resprodimg"
+        android:text="Price:  "
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:id="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/resprodprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignStart="@+id/btnRequest"
+        android:hint="00000"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:text="Request"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:fontFamily="casual"
+        android:id="@+id/btnRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/resprodimg"
+        android:layout_toEndOf="@+id/resprodimg"
+        android:layout_marginLeft="95dp"/>
+
+</RelativeLayout>

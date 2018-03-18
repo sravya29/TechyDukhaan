@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/product_list"
+    android:layout_height="match_parent"
+    android:weightSum="1" >
+
+
+
+    <ImageView
+        android:id="@+id/myprodimg"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="108dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/myprodimg"
+        android:layout_toEndOf="@+id/myprodimg"
+        android:fontFamily="casual"
+        android:hint="PRODUCT NAME"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:id="@+id/myprodname"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myprodname"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/myprodimg"
+        android:text="Price:  "
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:id="@+id/textView4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/textView4"
+        android:hint="00000"
+        android:id="@+id/myprodprice"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/editbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/myprodimg"
+        android:layout_toEndOf="@+id/myprodimg"
+        android:layout_marginLeft="4dp"
+        android:fontFamily="casual"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:text="Edit" />
+
+    <Button
+        android:text="Delete"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:fontFamily="casual"
+        android:id="@+id/delbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/myprodimg"
+        android:layout_toEndOf="@+id/myprodimg"
+        android:layout_marginLeft="94dp"/>
+
+</RelativeLayout>

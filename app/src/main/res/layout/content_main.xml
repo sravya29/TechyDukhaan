@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sravya.example.com.techydukhaan.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="320dp"
+            android:layout_height="90dp"
+            android:background="#03A9F4"
+            android:hint="Search..."
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/btnMainSearch"
+            android:layout_height="60dp"
+            android:onClick="RequestItem"
+            android:background="@drawable/searchiconlarge"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lvCat"/>
+
+</android.support.constraint.ConstraintLayout>
