@@ -24,7 +24,7 @@ import static sravya.example.com.techydukhaan.LoginActivity.SHAREDPREFFILE;
 import static sravya.example.com.techydukhaan.LoginActivity.TOKENPREF;
 import static sravya.example.com.techydukhaan.LoginActivity.USERIDPREF;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends SharedPref {
 
     EditText name;
     EditText cllg;
@@ -33,9 +33,6 @@ public class EditProfileActivity extends AppCompatActivity {
     EditText mail;
     Button update;
     User me = null;
-
-    private MobileServiceClient mClient;
-    private MobileServiceTable<User> mUserTable = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +129,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Toast.makeText(EditProfileActivity.this, "", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProfileActivity.this, "No user Found", Toast.LENGTH_SHORT).show();
                     }
                 } catch (final Exception e) {
                     createAndShowDialogFromTask(e, "User Error");
@@ -149,51 +146,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private User refreshItemsFromMobileServiceTable(String uid) throws ExecutionException, InterruptedException {
         return mUserTable.where().field("id").eq(uid).execute().get().get(0);
-    }
-
-    private void createAndShowDialogFromTask(final Exception exception, final String title) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowDialog(exception, title);
-            }
-        });
-    }
-
-    private void createAndShowDialog(Exception exception, String title) {
-        Throwable ex = exception;
-        if (exception.getCause() != null) {
-            ex = exception.getCause();
-        }
-        createAndShowDialog(ex.getMessage(), title);
-    }
-
-    private void createAndShowDialog(final String message, final String title) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.create().show();
-    }
-
-    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
-        return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-    private boolean loadUserTokenCache(MobileServiceClient client) {
-        SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
-        String userId = prefs.getString(USERIDPREF, null);
-        if (userId == null)
-            return false;
-        String token = prefs.getString(TOKENPREF, null);
-        if (token == null)
-            return false;
-
-        MobileServiceUser user = new MobileServiceUser(userId);
-        user.setAuthenticationToken(token);
-        client.setCurrentUser(user);
-
-        return true;
     }
 
 }

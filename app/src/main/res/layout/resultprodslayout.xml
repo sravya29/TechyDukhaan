@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:weightSum="1" >
 
-
-
     <ImageView
         android:id="@+id/resprodimg"
         android:layout_width="180dp"
@@ -25,38 +23,41 @@
         android:layout_alignTop="@+id/resprodimg"
         android:fontFamily="casual"
         android:hint="NAME"
+        android:textAlignment="center"
         android:textSize="25dp"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/resprodname"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="15dp"
+        android:layout_above="@+id/btnRequest"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="13dp"
         android:layout_toEndOf="@+id/resprodimg"
-        android:text="Price:  "
         android:fontFamily="casual"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:id="@+id/textView4" />
+        android:text="Price:  "
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/resprodprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView4"
-        android:layout_alignStart="@+id/btnRequest"
+        android:layout_toEndOf="@+id/resprodname"
         android:hint="00000"
         android:textSize="25sp"
         android:textStyle="bold" />
 
     <Button
-        android:text="Request"
+        android:text="Details"
         android:textStyle="bold"
+        android:background="#2196F3"
         android:textAllCaps="false"
         android:fontFamily="casual"
         android:id="@+id/btnRequest"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/resprodimg"

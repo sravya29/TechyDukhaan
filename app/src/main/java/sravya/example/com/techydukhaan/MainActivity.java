@@ -2,13 +2,10 @@ package sravya.example.com.techydukhaan;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,11 +18,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends SharedPref
         implements NavigationView.OnNavigationItemSelectedListener {
-
-
-    String[] types = {"REFERENCE BOOKS", "STATIONARY", "EQUIPMENTS", "GUIDE BOOKS", "WRITTEN NOTES", "OTHERS"};
 
 
     @Override
@@ -34,8 +28,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -48,12 +40,12 @@ public class MainActivity extends AppCompatActivity
 
         List<Category> lst = new ArrayList<Category>();
 
-        lst.add(new Category(R.drawable.books, types[0]));
-        lst.add(new Category(R.drawable.electronics, types[1]));
-        lst.add(new Category(R.drawable.civil, types[2]));
-        lst.add(new Category(R.drawable.software, types[3]));
-        lst.add(new Category(R.drawable.mechanical, types[4]));
-        lst.add(new Category(R.drawable.civil, types[5]));
+        lst.add(new Category(R.drawable.refbooksicon, types[0]));
+        lst.add(new Category(R.drawable.stationyicon, types[1]));
+        lst.add(new Category(R.drawable.equipsicon, types[2]));
+        lst.add(new Category(R.drawable.guidesicon, types[3]));
+        lst.add(new Category(R.drawable.notesicon, types[4]));
+        lst.add(new Category(R.drawable.othericon, types[5]));
 
         ListView catlv = (ListView) findViewById(R.id.lvCat);
         CategoryAdapter adap = new CategoryAdapter(MainActivity.this, R.layout.cat_item, lst);
@@ -111,7 +103,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_my_products) {
             startActivity(new Intent(MainActivity.this, MyProductsActivity.class));
         } else if (id == R.id.nav_logout) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+            logout.putExtra("sender", "main");
+            startActivity(logout);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

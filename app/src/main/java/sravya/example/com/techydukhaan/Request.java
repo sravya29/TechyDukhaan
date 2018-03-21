@@ -2,11 +2,8 @@ package sravya.example.com.techydukhaan;
 
 public class Request {
 
-    @com.google.gson.annotations.SerializedName("sendid")
-    String sendid;
-
-    @com.google.gson.annotations.SerializedName("recvid")
-    String recvid;
+    @com.google.gson.annotations.SerializedName("uid")
+    String uid;
 
     @com.google.gson.annotations.SerializedName("pid")
     String pid;
@@ -14,9 +11,8 @@ public class Request {
     @com.google.gson.annotations.SerializedName("id")
     String id;
 
-    public Request(String sendid, String recvid, String pid, String id) {
-        this.sendid = sendid;
-        this.recvid = recvid;
+    public Request(String uid, String pid, String id) {
+        this.uid = uid;
         this.pid = pid;
         this.id = id;
     }
@@ -24,20 +20,12 @@ public class Request {
     public Request() {
     }
 
-    public String getSendid() {
-        return sendid;
+    public String getUid() {
+        return uid;
     }
 
-    public void setSendid(String sendid) {
-        this.sendid = sendid;
-    }
-
-    public String getRecvid() {
-        return recvid;
-    }
-
-    public void setRecvid(String recvid) {
-        this.recvid = recvid;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getPid() {

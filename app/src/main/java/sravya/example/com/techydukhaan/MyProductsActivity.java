@@ -25,10 +25,8 @@ import static sravya.example.com.techydukhaan.LoginActivity.SHAREDPREFFILE;
 import static sravya.example.com.techydukhaan.LoginActivity.TOKENPREF;
 import static sravya.example.com.techydukhaan.LoginActivity.USERIDPREF;
 
-public class MyProductsActivity extends AppCompatActivity {
+public class MyProductsActivity extends SharedPref {
 
-    private MobileServiceClient mClient;
-    private MobileServiceTable<Product> mProductTable;
     private MyProductAdapter mAdapter;
 
     @Override
@@ -72,22 +70,6 @@ public class MyProductsActivity extends AppCompatActivity {
 
     }
 
-    private boolean loadUserTokenCache(MobileServiceClient client){
-        SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
-        String userId = prefs.getString(USERIDPREF, null);
-        if (userId == null)
-            return false;
-        String token = prefs.getString(TOKENPREF, null);
-        if (token == null)
-            return false;
-
-        MobileServiceUser user = new MobileServiceUser(userId);
-        user.setAuthenticationToken(token);
-        client.setCurrentUser(user);
-
-        return true;
-    }
-
     private void refreshItemsFromTable() {
 
         @SuppressLint("StaticFieldLeak")
@@ -129,35 +111,6 @@ public class MyProductsActivity extends AppCompatActivity {
                 .field("uid")
                 .eq(mClient.getCurrentUser().getUserId())
                 .execute().get();
-    }
-
-    private void createAndShowDialogFromTask(final Exception exception, final String title) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowDialog(exception, title);
-            }
-        });
-    }
-
-    private void createAndShowDialog(Exception exception, String title) {
-        Throwable ex = exception;
-        if (exception.getCause() != null) {
-            ex = exception.getCause();
-        }
-        createAndShowDialog(ex.getMessage(), title);
-    }
-
-    private void createAndShowDialog(final String message, final String title) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.create().show();
-    }
-
-    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
-        return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override

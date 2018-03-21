@@ -26,16 +26,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.concurrent.ExecutionException;
 
-public class ProdAddActivity extends AppCompatActivity {
-    private MobileServiceClient mClient;
-    private MobileServiceTable<Product> mProductTable;
+public class ProdAddActivity extends SharedPref {
     Spinner protype, sage;
     Button upload, submit;
     EditText descript, price, name;
     ImageView pic;
     private Uri imageUri;
-    String[] types = {"REFERENCE BOOKS", "STATIONARY", "EQUIPMENTS", "GUIDE BOOKS", "WRITTEN NOTES", "OTHERS"};
-    String[] ages = {"< 2 months", "2 months", "4 months", "8 months", "1 year", "> 1 year"};
     String imageName = null;
 
     @Override
@@ -157,35 +153,6 @@ public class ProdAddActivity extends AppCompatActivity {
 
     public Product addItemInTable(Product item) throws ExecutionException, InterruptedException {
         return mProductTable.insert(item).get();
-    }
-
-    private void createAndShowDialogFromTask(final Exception exception, String title) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowDialog(exception, "Error");
-            }
-        });
-    }
-
-    private void createAndShowDialog(Exception exception, String title) {
-        Throwable ex = exception;
-        if (exception.getCause() != null) {
-            ex = exception.getCause();
-        }
-        createAndShowDialog(ex.getMessage(), title);
-    }
-
-    private void createAndShowDialog(final String message, final String title) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.create().show();
-    }
-
-    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
-        return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override

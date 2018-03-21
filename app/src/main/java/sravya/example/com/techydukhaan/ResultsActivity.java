@@ -20,16 +20,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
+import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.field;
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.startsWith;
 import static sravya.example.com.techydukhaan.LoginActivity.SHAREDPREFFILE;
 import static sravya.example.com.techydukhaan.LoginActivity.TOKENPREF;
 import static sravya.example.com.techydukhaan.LoginActivity.USERIDPREF;
 
-public class ResultsActivity extends AppCompatActivity {
+public class ResultsActivity extends SharedPref {
 
-    private MobileServiceClient mClient;
-    private MobileServiceTable<Product> mProductTable;
-    private MobileServiceTable<User> mUserTable;
     private ResultAdapter mAdapter;
     List<Product> ans = new ArrayList<>();
     String src;
@@ -99,13 +97,15 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private synchronized List<Product> refreshItemsFromMobileServiceTable(String src) throws ExecutionException, InterruptedException {
+
+        src = src.trim();
+
         List<Product> listprods = mProductTable
                 .where()
                 .field("name").eq(src)
                 .or()
                 .field("cat").eq(src)
                 .execute().get();
-
 
         List<User> listusers = mUserTable
                 .where()
@@ -140,35 +140,6 @@ public class ResultsActivity extends AppCompatActivity {
         return ans;
     }
 
-    private void createAndShowDialogFromTask(final Exception exception, final String title) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowDialog(exception, title);
-            }
-        });
-    }
-
-    private void createAndShowDialog(Exception exception, String title) {
-        Throwable ex = exception;
-        if (exception.getCause() != null) {
-            ex = exception.getCause();
-        }
-        createAndShowDialog(ex.getMessage(), title);
-    }
-
-    private void createAndShowDialog(final String message, final String title) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.create().show();
-    }
-
-    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
-        return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -176,15 +147,9 @@ public class ResultsActivity extends AppCompatActivity {
             refreshItemsFromTable(src);
     }
 
-    private void loadUserTokenCache(MobileServiceClient client) {
-        client.setCurrentUser(null);
-        SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
-        if ((prefs.getString(USERIDPREF, null) == null) || (prefs.getString(TOKENPREF, null) == null))
-            return;
-
-        MobileServiceUser user = new MobileServiceUser(prefs.getString(USERIDPREF, null));
-        user.setAuthenticationToken(prefs.getString(TOKENPREF, null));
-        client.setCurrentUser(user);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
-
 }

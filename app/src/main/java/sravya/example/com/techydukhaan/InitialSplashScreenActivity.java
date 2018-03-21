@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 public class InitialSplashScreenActivity extends AppCompatActivity {
-    private static int SPLASH_TIME =2000;
+    private static int SPLASH_TIME = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,10 +15,11 @@ public class InitialSplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent homeintent=new Intent(InitialSplashScreenActivity.this,CardMainActivity.class);
-                startActivity(homeintent);
+                Intent logout = new Intent(InitialSplashScreenActivity.this, LoginActivity.class);
+                logout.putExtra("sender", "splash");
+                startActivity(logout);
                 finish();
             }
-        },SPLASH_TIME);
+        }, SPLASH_TIME);
     }
 }

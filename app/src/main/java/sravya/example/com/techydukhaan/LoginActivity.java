@@ -23,15 +23,9 @@ import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends SharedPref {
 
-    private MobileServiceClient mClient;
-    public static final String SHAREDPREFFILE = "temp";
-    public static final String USERIDPREF = "uid";
-    public static final String TOKENPREF = "tkn";
-
-    private MobileServiceTable<User> mUserTable = null;
-
+    public static final int GOOGLE_LOGIN_REQUEST_CODE = 1;
     static int a = 0;
 
     @Override
@@ -48,9 +42,18 @@ public class LoginActivity extends AppCompatActivity {
         mClient = AzureMobileServiceAdapter.getInstance().getClient();
         mUserTable = mClient.getTable(User.class);
 
-    }
+        String sender = (String) getIntent().getExtras().get("sender");
 
-    public static final int GOOGLE_LOGIN_REQUEST_CODE = 1;
+        if (sender != null) {
+            if (sender.equals("splash")) {
+                if (a == 0 && loadUserTokenCache(mClient)) {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }
+            }
+        }
+
+    }
 
     public void authenticate(View v) {
         if (a == 0) {
@@ -98,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
             return ;
         }
 
-
         final User me = new User();
 
         me.setName("");
@@ -129,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }
 
@@ -182,67 +185,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public User addItemInTable(User item) throws ExecutionException, InterruptedException {
         return mUserTable.insert(item).get();
-    }
-
-    private void createAndShowDialogFromTask(final Exception exception, String title) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowDialog(exception, "Error");
-            }
-        });
-    }
-
-    private void createAndShowDialog(Exception exception, String title) {
-        Throwable ex = exception;
-        if (exception.getCause() != null) {
-            ex = exception.getCause();
-        }
-        createAndShowDialog(ex.getMessage(), title);
-    }
-
-    private void createAndShowDialog(final String message, final String title) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.create().show();
-    }
-
-    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
-        return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-    private void cacheUserToken(MobileServiceUser user) {
-        SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
-        Editor editor = prefs.edit();
-        editor.putString(USERIDPREF, user.getUserId());
-        editor.putString(TOKENPREF, user.getAuthenticationToken());
-        editor.commit();
-    }
-
-    private void ClearCache() {
-        SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
-        Editor editor = prefs.edit();
-        editor.putString(USERIDPREF, null);
-        editor.putString(TOKENPREF, null);
-        editor.commit();
-    }
-
-    private boolean loadUserTokenCache(MobileServiceClient client) {
-        SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
-        String userId = prefs.getString(USERIDPREF, null);
-        if (userId == null)
-            return false;
-        String token = prefs.getString(TOKENPREF, null);
-        if (token == null)
-            return false;
-
-        MobileServiceUser user = new MobileServiceUser(userId);
-        user.setAuthenticationToken(token);
-        client.setCurrentUser(user);
-
-        return true;
     }
 
 }

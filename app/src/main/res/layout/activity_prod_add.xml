@@ -20,17 +20,16 @@
             android:textColor="@android:color/white"
             android:textSize="25sp"
             android:textStyle="bold"/>
-
         <EditText
-            android:id="@+id/etProdName"
+            android:layout_marginLeft="20dp"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:background="#B3E5FC"
             android:fontFamily="casual"
-            android:hint="Enter Product Name"
-            android:textColor="@android:color/black" />
+            android:background="#B3E5FC"
+            android:id="@+id/etProdName"
+            android:textColor="#0D47A1"
+            android:layout_marginTop="10dp"
+            android:hint="Enter Product Name" />
 
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -106,8 +105,8 @@
                 android:hint="Price"
                 android:id="@+id/price"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textColor="#0D47A1"
+                android:textSize="20sp" />/>
 
         </LinearLayout>
 
@@ -159,7 +158,7 @@
                 android:textAlignment="center"
                 android:background="#B3E5FC"
                 android:id="@+id/descript"
-                android:textColor="#E1F5FE"
+                android:textColor="#0D47A1"
                 android:hint="Enter Product Description here"/>
         </LinearLayout>
 

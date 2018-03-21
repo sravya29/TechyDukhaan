@@ -26,6 +26,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
+import javax.xml.transform.Result;
+
 import static sravya.example.com.techydukhaan.LoginActivity.SHAREDPREFFILE;
 import static sravya.example.com.techydukhaan.LoginActivity.TOKENPREF;
 import static sravya.example.com.techydukhaan.LoginActivity.USERIDPREF;
@@ -38,7 +40,6 @@ public class ResultAdapter extends ArrayAdapter<Product> implements Serializable
     private MobileServiceTable<Request> mResultTable;
     private ResultAdapter mAdapter;
     private  Activity mActivity;
-    Object var = null;
 
     public ResultAdapter(Context context, int layoutResourceId) {
         super(context, layoutResourceId);
@@ -72,7 +73,6 @@ public class ResultAdapter extends ArrayAdapter<Product> implements Serializable
                             imageView.setImageBitmap(bitmap);
                         }
                     });
-                    var = 1;
                 }
                 catch(Exception ex) {
                     final String exceptionMessage = ex.getMessage();
@@ -105,20 +105,17 @@ public class ResultAdapter extends ArrayAdapter<Product> implements Serializable
 
         GetImage(((ImageView) row.findViewById(R.id.resprodimg)), currentItem);
 
-        while (var == null) ;
-
         row.findViewById(R.id.btnRequest).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (loadUserTokenCache(mClient)) {
-                    addItem(currentItem.getPid(), mClient.getCurrentUser().getUserId());
-                    //Intent i=new Intent(mActivity,ProductDetailActivity.class);
-                    //i.putExtra("item",currentItem);
-                    //mActivity.startActivity(i);
+                    // addItem(currentItem.getPid(), mClient.getCurrentUser().getUserId());
+                    Intent detailsIntent = new Intent(mActivity, ProdDetailsActivity.class);
+                    detailsIntent.putExtra("item", currentItem);
+                    mActivity.startActivity(detailsIntent);
                 } else {
                     Toast.makeText(mContext, "Please Login to view details.", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 

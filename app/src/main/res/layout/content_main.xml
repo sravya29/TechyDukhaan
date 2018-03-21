@@ -14,8 +14,8 @@
 
         <EditText
             android:id="@+id/search"
-            android:layout_width="320dp"
-            android:layout_height="90dp"
+            android:layout_width="310dp"
+            android:layout_height="match_parent"
             android:background="#03A9F4"
             android:hint="Search..."
             android:layout_gravity="center"
@@ -24,8 +24,8 @@
 
         <Button
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/btnMainSearch"
-            android:layout_height="60dp"
             android:onClick="RequestItem"
             android:background="@drawable/searchiconlarge"/>
 
